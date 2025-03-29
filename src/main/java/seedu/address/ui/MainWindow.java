@@ -37,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ReminderListPanel birthdayReminderListPanel;
+    private ReminderListPanel workAnniversaryReminderListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -54,6 +56,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane birthdayReminderPanelPlaceholder;
+
+    @FXML
+    private StackPane workAnniversaryReminderPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -118,6 +126,13 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        // New panels for reminders
+        birthdayReminderListPanel = new ReminderListPanel(logic.getBirthdayReminderList(), true);
+        birthdayReminderPanelPlaceholder.getChildren().add(birthdayReminderListPanel.getRoot());
+
+        workAnniversaryReminderListPanel = new ReminderListPanel(logic.getWorkAnniversaryReminderList(), false);
+        workAnniversaryReminderPanelPlaceholder.getChildren().add(workAnniversaryReminderListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -169,7 +184,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser("Invalid employee ID format.");
         }
     }
-
 
     /**
      * Sets the default size based on {@code guiSettings}.

@@ -200,7 +200,6 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(checkPerson -> checkPerson.hasSameDetails(toCheck));
     }
-
     /**
      * Checks if there is an employee ID in the list that has a prefix conflict
      * with the given employee ID. A prefix conflict occurs when one employee ID
@@ -231,4 +230,6 @@ public class UniquePersonList implements Iterable<Person> {
                 .filter(person -> !person.getEmployeeId().equals(toIgnore))
                 .anyMatch(person -> person.getEmployeeId().hasPrefixConflict(employeeId));
     }
+
+
 }

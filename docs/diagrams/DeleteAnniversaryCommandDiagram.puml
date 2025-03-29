@@ -1,0 +1,160 @@
+@startuml
+package seedu.address.logic.parser.anniversary {
+    class DeleteAnniversaryCommandParser {
+        + parse(String args) : DeleteAnniversaryCommand
+    }
+}
+
+package seedu.address.logic.commands.anniversary {
+    class DeleteAnniversaryCommand {
+    - targetIndex : Index
+        - employeeIdPrefix : EmployeeId
+        --
+        + DeleteAnniversaryCommand(Index targetIndex, EmployeeId employeeIdPrefix)
+        + execute(Model model) : CommandResult
+    }
+}
+
+package seedu.address.logic.parser {
+    class ParserUtil {
+    + parseEmployeeIdPrefix(String employeeIdPrefix) : EmployeeId
+    }
+}
+
+package seedu.address.model.person {
+    class EmployeeId {
+        - employeeId : UUID
+        --
+        + EmployeeId(UUID employeeId)
+    }
+    class Person {
+    - employeeId : EmployeeId
+        - name : Name
+        - jobPosition : JobPosition
+        - email : Email
+        - phone : Phone
+        - tags : Set<Tag>
+        - anniversaries : List<Anniversary>
+        --
+        + Person(EmployeeId employeeId, Name name, JobPosition jobPosition, Email email, Phone phone, Set<Tag> tags, List<Anniversary> anniversaries)
+    }
+}
+
+package "seedu.address.logic.commands {
+    abstract class Command {
+    + CommandResult execute(Model model) {abstract}
+    }
+}
+
+package seedu.address.model.anniversary {
+    class Anniversary {
+        - date : LocalDate
+        - name : String
+        - description : String
+        - type : AnniversaryType
+        --
+        + Anniversary(LocalDate date, String name, String description, String type)
+    }
+    class AnniversaryType {
+    - type : String}
+        - description : String
+        --
+        + AnniversaryType(String type, String description)
+    }
+}
+
+package seedu.address.model {
+    interface Model {
+        + getFilteredByEmployeeIdPrefixList(EmployeeId employeeIdPrefix) : List<Person>
+        + setPerson(Person target, Person editedPerson) : void
+    }
+    class Index {
+    - index : int
+        --
+        + Index(int index)
+    }
+}
+
+DeleteAnniversaryCommand --|> Command
+DeleteAnniversaryCommandParser --> DeleteAnniversaryCommand : creates
+DeleteAnniversaryCommandParser -> ParserUtil : uses
+DeleteAnniversaryCommandParser -> "1" Index : uses
+DeleteAnniversaryCommandParser -> "1" EmployeeId : uses
+DeleteAnniversaryCommand -> "1" EmployeeId : contains
+DeleteAnniversaryCommand --> "1" Index : contains
+DeleteAnniversaryCommand -> Person : processes
+DeleteAnniversaryCommand -> "1" Person : finds for update
+DeleteAnniversaryCommand -> Anniversary : finds for delete
+DeleteAnniversaryCommand -> "1" Anniversary : deletes
+
+@enduml
+
+
+/**
+ * Deletes Anniversaries from a person
+ */
+@Getter
+public class DeleteAnniversaryCommand extends Command {
+    public static final String MESSAGE_SUCCESS = "anniversary deleted: %1$s";
+    public static final String COMMAND_WORD = "deleteAnni";
+    public static final Object MESSAGE_USAGE = COMMAND_WORD + ": deletes an anniversary to the person identified by a "
+            + "prefix of their Employee ID.\n"
+            + "Parameters: "
+            + "eid/EMPLOYEE_ID "
+            + "ad/index ";
+    private final Index targetIndex;
+    private final EmployeeId employeeIdPrefix;
+
+    /**
+     * constructs a deleteAnniversaryCommand
+     * @param targetIndex tar
+     * @param employeeIdPrefix emp
+     */
+    public DeleteAnniversaryCommand(Index targetIndex, EmployeeId employeeIdPrefix) {
+        this.targetIndex = targetIndex;
+        this.employeeIdPrefix = employeeIdPrefix;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> matchedEmployees = model.getFilteredByEmployeeIdPrefixList(employeeIdPrefix);
+
+        if (matchedEmployees.size() > 1) {
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_MULTIPLE_EMPLOYEES_FOUND_WITH_PREFIX,
+                    employeeIdPrefix
+            ));
+        }
+
+        if (matchedEmployees.isEmpty()) {
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_PERSON_PREFIX_NOT_FOUND,
+                    employeeIdPrefix
+            ));
+        }
+
+        Person personToEdit = matchedEmployees.get(0);
+        List<Anniversary> anniversaryList = personToEdit.getAnniversaries();
+
+
+        if (targetIndex.getZeroBased() >= anniversaryList.size()) {
+            throw new CommandException(MESSAGE_ANNIVERSARY_OUT_OF_BOUNDS);
+        }
+
+        Anniversary anniversaryToDelete = anniversaryList.get(targetIndex.getZeroBased());
+        anniversaryList.remove(anniversaryToDelete);
+        Person updatedPerson = Person.builder()
+                .employeeId(personToEdit.getEmployeeId())
+                .name(personToEdit.getName())
+                .jobPosition(personToEdit.getJobPosition())
+                .email(personToEdit.getEmail())
+                .phone(personToEdit.getPhone())
+                .tags(personToEdit.getTags())
+                .anniversaries(anniversaryList).build();
+        // update the model
+        model.setPerson(personToEdit, updatedPerson);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, anniversaryToDelete));
+    }
+}

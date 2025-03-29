@@ -1,0 +1,8 @@
+employeeId,name,phone,email,jobposition,tags,anniversaryDate,anniversaryType,anniversaryTypeDesc,anniversaryName,anniversaryDescription
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,,,,,
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,,,,,
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,2025-03-13,Family,,"""Silver Wedding""","""Celebrating 25 years"""
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,2025-02-25,wedding,,silver wedding,things
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,2025-02-25,wedding,,silver wedding,things
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,2025-02-25,Work Anniversary,Work Anniversary,Birthday,alex's Birthday
+00000000-0000-0000-0000-000000000012,Benson Meier,98765432,johnd@example.com,Financial Advisor,owesMoney;friends,,,,,

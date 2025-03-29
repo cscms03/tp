@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersonsWithAnniversaries.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -181,8 +181,28 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getBirthdayReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getWorkAnniversaryReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitChanges() {
             // Stub implementation, no-op
+        }
+
+        @Override
+        public void updateBirthdayReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateWorkAnniversaryReminderList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -231,6 +251,15 @@ public class AddPersonCommandTest {
         public boolean hasEmployeeIdPrefixConflict(EmployeeId employeeId) {
             return false;
         }
-    }
 
+        @Override
+        public void updateBirthdayReminderList() {
+            // Stub implementation, no-op
+        }
+
+        @Override
+        public void updateWorkAnniversaryReminderList() {
+            // Stub implementation, no-op
+        }
+    }
 }

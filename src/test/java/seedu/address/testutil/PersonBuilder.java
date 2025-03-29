@@ -8,6 +8,7 @@ import java.util.Set;
 
 import lombok.Builder;
 import seedu.address.model.anniversary.Anniversary;
+import seedu.address.model.anniversary.AnniversaryType;
 import seedu.address.model.anniversary.Birthday;
 import seedu.address.model.anniversary.WorkAnniversary;
 import seedu.address.model.person.Email;
@@ -53,12 +54,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         jobPosition = new JobPosition(DEFAULT_JOBPOSITION);
         tags = new HashSet<>();
-        List<Anniversary> anni = new ArrayList<>();
-        anni.add(DEFAULT_BIRTHDAY);
-        anni.add(DEFAULT_WORK_ANNIVERSARY);
-        anniversaries = anni;
+        anniversaries = new ArrayList<>();
     }
-
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
@@ -70,6 +67,24 @@ public class PersonBuilder {
         jobPosition = personToCopy.getJobPosition();
         tags = new HashSet<>(personToCopy.getTags());
         anniversaries = new ArrayList<>(personToCopy.getAnniversaries());
+    }
+
+    /**
+     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * @return
+     */
+    public static Person defaultPerson() {
+        Person person = new PersonBuilder()
+                .withEmployeeId(DEFAULT_EMPLOYEE_ID)
+                .withName(DEFAULT_NAME)
+                .withEmail(DEFAULT_EMAIL)
+                .withPhone(DEFAULT_PHONE)
+                .withJobPosition(DEFAULT_JOBPOSITION)
+                .build();
+        person.getAnniversaries().add(DEFAULT_BIRTHDAY);
+        person.getAnniversaries().add(DEFAULT_WORK_ANNIVERSARY);
+        person.getTags();
+        return person;
     }
 
     /**
@@ -130,6 +145,16 @@ public class PersonBuilder {
         anni.add(new Anniversary(localWaDate, new WorkAnniversary(),
                 "Work Anniversary", name.fullName));
         this.anniversaries = anni;
+        return this;
+    }
+    /**
+     * Adds an anniversary to the person's anniversary list.
+     */
+    public PersonBuilder withAnniversary(String date, String type, String name, String description) {
+        this.anniversaries.add(new Anniversary(
+                LocalDate.parse(date),
+                new AnniversaryType(type, ""),
+                name, description));
         return this;
     }
 

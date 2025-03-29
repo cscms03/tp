@@ -1,0 +1,200 @@
+{
+  "persons": [
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000011",
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "tags": ["friends"],
+      "anniversaries": [
+        {
+          "date": "1995-03-16",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Alice Pauline"
+        },
+        {
+          "date": "2017-08-07",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Alice Pauline"
+        }
+      ],
+      "jobposition": "Hiring Womanager"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000012",
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "tags": ["owesMoney", "friends"],
+      "anniversaries": [
+        {
+          "date": "1991-05-11",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Benson Meier"
+        },
+        {
+          "date": "2015-12-25",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Benson Meier"
+        }
+      ],
+      "jobposition": "Financial Advisor"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000003",
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "tags": [],
+      "anniversaries": [
+        {
+          "date": "1997-01-01",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Carl Kurz"
+        },
+        {
+          "date": "2018-08-18",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Carl Kurz"
+        }
+      ],
+      "jobposition": "Wall mart"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000004",
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "tags": ["friends"],
+      "anniversaries": [
+        {
+          "date": "1993-11-13",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Daniel Meier"
+        },
+        {
+          "date": "2019-02-27",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Daniel Meier"
+        }
+      ],
+      "jobposition": "10th man"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000005",
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "tags": [],
+      "anniversaries": [
+        {
+          "date": "1992-09-15",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Elle Meyer"
+        },
+        {
+          "date": "2016-06-01",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Elle Meyer"
+        }
+      ],
+      "jobposition": "The one"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000006",
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "tags": [],
+      "anniversaries": [
+        {
+          "date": "1994-08-22",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "Fiona Kunz"
+        },
+        {
+          "date": "2017-11-22",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "Fiona Kunz"
+        }
+      ],
+      "jobposition": "little dyke"
+    },
+    {
+      "employeeId": "00000000-0000-0000-0000-000000000007",
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "tags": [],
+      "anniversaries": [
+        {
+          "date": "1996-04-12",
+          "type": {
+            "name": "Birthday",
+            "description": "Birthday"
+          },
+          "description": "Birthday",
+          "name": "George Best"
+        },
+        {
+          "date": "2018-10-12",
+          "type": {
+            "name": "Work Anniversary",
+            "description": "Work Anniversary"
+          },
+          "description": "Work Anniversary",
+          "name": "George Best"
+        }
+      ],
+      "jobposition": "4th man"
+    }
+  ]
+}

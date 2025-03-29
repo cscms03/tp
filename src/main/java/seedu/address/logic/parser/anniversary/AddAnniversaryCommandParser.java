@@ -3,83 +3,51 @@ package seedu.address.logic.parser.anniversary;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEEID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.List;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORK_ANNIVERSARY;
 
 import seedu.address.logic.commands.anniversary.AddAnniversaryCommand;
+import seedu.address.logic.parser.AnniversaryParserUtils;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.anniversary.Anniversary;
-import seedu.address.model.anniversary.AnniversaryType;
 import seedu.address.model.person.EmployeeId;
 
 /**
  * Parses input arguments and creates a new AddAnniversaryCommand object
  */
 public class AddAnniversaryCommandParser implements Parser<AddAnniversaryCommand> {
-    public static final String MESSAGE_ANNIVERSARY_TYPE_PARSE = "Anniversary type must be in the format of "
-            + "at/TYPE1 atdesc/description";
 
     @Override
     public AddAnniversaryCommand parse(String args) throws ParseException {
         // tokenize using relevant prefixes
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_EMPLOYEEID, PREFIX_ANNIVERSARY_DATE, PREFIX_NAME,
-                PREFIX_ANNIVERSARY_DESC, PREFIX_ANNIVERSARY_TYPE, PREFIX_ANNIVERSARY_TYPE_DESC
+                args, PREFIX_EMPLOYEEID, PREFIX_ANNIVERSARY_DATE, PREFIX_ANNIVERSARY_NAME,
+                PREFIX_ANNIVERSARY_DESC, PREFIX_ANNIVERSARY_TYPE, PREFIX_ANNIVERSARY_TYPE_DESC,
+                PREFIX_BIRTHDAY, PREFIX_WORK_ANNIVERSARY, PREFIX_NAME
         );
 
         // Basic validation to ensure required prefixes exist
-        if (argMultimap.getValue(PREFIX_EMPLOYEEID).isEmpty()
-                || argMultimap.getValue(PREFIX_ANNIVERSARY_DATE).isEmpty()
-                || argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_EMPLOYEEID).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAnniversaryCommand.MESSAGE_USAGE)
             );
         }
-
         // parse required fields
         EmployeeId employeeIdPrefix = ParserUtil.parseEmployeeIdPrefix(argMultimap.getValue(PREFIX_EMPLOYEEID).get());
-        String dateStr = argMultimap.getValue(PREFIX_ANNIVERSARY_DATE).get();
-        String nameStr = argMultimap.getValue(PREFIX_NAME).get();
-
-        LocalDate date;
         try {
-            date = LocalDate.parse(dateStr);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Anniversary.MESSAGE_DATE_CONSTRAINTS);
+            Anniversary anniversary = AnniversaryParserUtils.parseAnniversary(argMultimap);
+            return new AddAnniversaryCommand(employeeIdPrefix, anniversary);
+        } catch (ParseException pe) {
+            throw pe;
         }
-
-        // parse optional fields
-        String descStr = argMultimap.getValue(PREFIX_ANNIVERSARY_DESC).orElse("");
-        List<String> typeTokens = argMultimap.getAllValues(PREFIX_ANNIVERSARY_TYPE);
-
-        // Build a AnniversaryType from each at/ prefix
-        if (typeTokens.isEmpty()) {
-            throw new ParseException(MESSAGE_ANNIVERSARY_TYPE_PARSE);
-        }
-        if (typeTokens.size() > 2) {
-            throw new ParseException(MESSAGE_ANNIVERSARY_TYPE_PARSE);
-        }
-        String name = typeTokens.get(0);
-        String description = typeTokens.size() == 1 ? "" : typeTokens.get(1);
-        AnniversaryType type = new AnniversaryType(name, description);
-
-        Anniversary newAnniversary = new Anniversary(
-                date,
-                type,
-                descStr,
-                nameStr
-        );
-
-        return new AddAnniversaryCommand(employeeIdPrefix, newAnniversary);
     }
 }

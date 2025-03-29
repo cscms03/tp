@@ -1,0 +1,36 @@
+@startuml
+actor User as U
+participant AddAnniversaryCommandParser as AACP
+participant ParserUtils as PU
+participant AnniversaryParserUtils as APU
+participant AddAnniversaryCommand as AAC
+participant Model as M
+
+
+U -> AACP: parse(String args)
+activate AACP
+AACP -> PU : parseEmployeeIdPrefix(String employeeIdPrefix)
+activate PU
+PU --> AACP: EmployeeId
+deactivate PU
+AACP -> APU: parseAnniversary(ArgumentMultimap argMultimap)
+activate APU
+APU --> AACP: Anniversary
+deactivate APU
+create AAC
+AACP -> AAC : new AddAnniversaryCommand(EmployeeId employeeIdPrefix, Anniversary anniversary)
+Activate AAC
+return AddAnniversaryCommand
+AACP --> U : AddAnniversaryCommand
+deactivate AACP
+
+U -> AAC: execute(Model model)
+activate AAC
+AAC -> M : getFilteredByEmployeeIdPrefixList(EmployeeId employeeIdPrefix)
+activate M
+M --> AAC : List<Person>
+deactivate M
+AAC -> M : setPerson(Person target, Person editedPerson)
+return CommandResult
+
+@enduml

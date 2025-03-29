@@ -13,7 +13,6 @@ import lombok.Builder;
 import lombok.Data;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.anniversary.Anniversary;
-import seedu.address.model.anniversary.Birthday;
 import seedu.address.model.tag.Tag;
 
 
@@ -76,6 +75,8 @@ public class Person {
 
     /**
      * Returns true if both persons have the same user details.
+     * this excludes the employee id and anniversaryList.
+     * This defines a weaker notion of equality between two persons.
      */
     public boolean hasSameDetails(Person otherPerson) {
         return name.equals(otherPerson.name)
@@ -83,9 +84,9 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && jobPosition.equals(otherPerson.jobPosition)
                 && tags.equals(otherPerson.tags);
-
     }
 
+    //TODO: Remove this method after finalising the feature
     /**
      * Returns the next upcoming important date (birthday or work anniversary) for this person.
      *
@@ -110,21 +111,56 @@ public class Person {
     }
 
     /**
-     * Returns the birthday of the person if available.
+     * Calculates the next upcoming date for a given anniversary date.
      *
-     * @return The birthday as a {@code LocalDate} object if it exists, otherwise returns {@code null}.
+     * @param date The original anniversary date.
+     * @return The next upcoming anniversary date adjusted to the current or next year.
      */
-    public LocalDate getBirthday() {
+    private LocalDate calculateNextUpcomingDate(LocalDate date) {
+        LocalDate today = LocalDate.now();
+        LocalDate nextDate = date.withYear(today.getYear());
+        return nextDate.isBefore(today) ? nextDate.plusYears(1) : nextDate;
+    }
+
+    /**
+     * Returns the next upcoming date for the given anniversary type.
+     *
+     * @param anniversaryTypeName The class representing the anniversary type (e.g., Birthday.class).
+     * @return The next upcoming date, or {@code null} if no matching anniversary is found.
+     */
+    private LocalDate getNextUpcomingDateByType(String anniversaryTypeName) {
         return anniversaries.stream()
-                .filter(a -> a.getType() instanceof Birthday)
+                .filter(a -> a.getType().getName().equalsIgnoreCase(anniversaryTypeName))
                 .map(Anniversary::getDate)
-                .findFirst()
+                .filter(Objects::nonNull)
+                .map(this::calculateNextUpcomingDate)
+                .min(LocalDate::compareTo)
                 .orElse(null);
+    }
+
+    /**
+     * Returns the next upcoming birthday date for this person.
+     *
+     * @return The upcoming birthday as a {@code LocalDate}, or {@code null} if none found.
+     */
+    public LocalDate getNextUpcomingBirthdayDate() {
+        return getNextUpcomingDateByType("Birthday");
+    }
+
+    /**
+     * Returns the next upcoming work anniversary date for this person.
+     *
+     * @return The upcoming work anniversary as a {@code LocalDate}, or {@code null} if none found.
+     */
+    public LocalDate getNextUpcomingWorkAnniversaryDate() {
+        return getNextUpcomingDateByType("Work Anniversary");
     }
 
     public String getEmployeeIdAsString() {
         return employeeId.toString();
     }
+
+    //TODO: Remove this method after finalising the feature
     /**
      * Checks if the next upcoming important date (birthday or work anniversary)
      * for this person is within the specified number of days from today.
@@ -133,8 +169,8 @@ public class Person {
      * @return {@code true} if the next upcoming date is within the specified number of days,
      *         {@code false} otherwise or if no upcoming date is available.
      */
-    public boolean isUpcomingWithinDays(int days) {
-        LocalDate nextDate = getNextUpcomingDate();
+    public boolean isUpcomingWithinDays(String anniversaryTypeName, int days) {
+        LocalDate nextDate = getNextUpcomingDateByType(anniversaryTypeName);
         if (nextDate == null) {
             return false;
         }

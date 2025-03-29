@@ -5,6 +5,12 @@ package seedu.address.logic.commands.anniversary;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_ANNIVERSARY;
 import static seedu.address.logic.Messages.MESSAGE_SUCCESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEEID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,23 +31,24 @@ import seedu.address.model.person.Person;
 @Getter
 public class AddAnniversaryCommand extends Command {
 
-    public static final String COMMAND_WORD = "anniversary";
+    public static final String COMMAND_WORD = "addAnni";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an anniversary to the person identified by "
             + "a prefix of their Employee ID.\n"
-            + "Parameters: "
-            + "eid/EMPLOYEE_ID_PREFIX "
-            + "d/DATE "
-            + "n/ANNIVERSARY_NAME "
-            + "[ad/DESCRIPTION] "
-            + "[at/TYPE]...\n"
+            + "Parameters: [] indicates optional fields\n"
+            + PREFIX_EMPLOYEEID + "EMPLOYEE_ID_PREFIX "
+            + PREFIX_ANNIVERSARY_DATE + "DATE "
+            + PREFIX_ANNIVERSARY_NAME + "ANNIVERSARY_NAME "
+            + PREFIX_ANNIVERSARY_TYPE + "ANNIVERSARY_TYPE "
+            + "[" + PREFIX_ANNIVERSARY_DESC + "DESCRIPTION] "
+            + "[" + PREFIX_ANNIVERSARY_TYPE_DESC + "TYPE]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "eid/0c2414da-fafb-4e05-b4f7-befb22385381 "
-            + "d/2025-03-13 "
-            + "n/Silver Wedding "
-            + "ad/Celebrating 25 years "
-            + "at/Personal "
-            + "at/Family";
+            + PREFIX_EMPLOYEEID + " 0c2414da-fafb-4e05-b4f7-befb22385381 "
+            + PREFIX_ANNIVERSARY_DATE + "2025-03-13 "
+            + PREFIX_ANNIVERSARY_NAME + "Silver Wedding "
+            + PREFIX_ANNIVERSARY_TYPE + "Wedding "
+            + PREFIX_ANNIVERSARY_DESC + "Celebrating 25 years "
+            + PREFIX_ANNIVERSARY_TYPE_DESC + "Personal";
     private final Anniversary toAdd;
     private final EmployeeId employeeIdPrefix;
 

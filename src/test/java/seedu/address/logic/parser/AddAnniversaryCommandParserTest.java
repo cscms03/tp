@@ -3,8 +3,10 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.AnniversaryParserUtils.INVALID_ANNIVERSARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNIVERSARY_TYPE_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEEID;
@@ -31,7 +33,7 @@ public class AddAnniversaryCommandParserTest {
     public void parse_validInput_returnsAddAnniversaryCommand() throws Exception {
         String userInput = PREFIX_EID_PARSABLE + "00000000-0000-0000-0000-000000000001 "
                 + PREFIX_ANNIVERSARY_DATE + "2025-03-13 "
-                + PREFIX_NAME + "BirthdayName "
+                + PREFIX_ANNIVERSARY_NAME + "BirthdayName "
                 + PREFIX_ANNIVERSARY_TYPE + "Personal "
                 + PREFIX_ANNIVERSARY_TYPE_DESC + "Family "
                 + PREFIX_ANNIVERSARY_DESC + "Sample Description";
@@ -91,7 +93,8 @@ public class AddAnniversaryCommandParserTest {
                 + PREFIX_ANNIVERSARY_TYPE + "Two "
                 + PREFIX_ANNIVERSARY_TYPE + "Three";
         ParseException ex = assertThrows(ParseException.class, () -> parser.parse(userInput));
-        assertEquals(AddAnniversaryCommandParser.MESSAGE_ANNIVERSARY_TYPE_PARSE, ex.getMessage());
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, INVALID_ANNIVERSARY),
+                ex.getMessage());
     }
 
     @Test

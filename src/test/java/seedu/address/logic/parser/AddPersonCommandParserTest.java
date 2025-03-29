@@ -30,20 +30,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.WORK_ANNIVERSARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WORK_ANNIVERSARY_DESC_BOB;
+import static seedu.address.logic.parser.AnniversaryParserUtils.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBPOSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertFieldEqualityFirst;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersonsWithAnniversaries.AMY;
+import static seedu.address.testutil.TypicalPersonsWithAnniversaries.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPersonCommand;
-import seedu.address.model.anniversary.Anniversary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobPosition;
 import seedu.address.model.person.Name;
@@ -212,11 +212,11 @@ public class AddPersonCommandParserTest {
         //invalid birthday date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + JOB_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_BIRTHDAY_DATE_DESC + WORK_ANNIVERSARY_DESC_BOB,
-                Anniversary.MESSAGE_DATE_CONSTRAINTS);
+                MESSAGE_DATE_CONSTRAINTS);
 
         //invalid work anniversary date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + JOB_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB + INVALID_WORK_ANNIVERSARY_DATE_DESC,
-                Anniversary.MESSAGE_DATE_CONSTRAINTS);
+                MESSAGE_DATE_CONSTRAINTS);
     }
 }

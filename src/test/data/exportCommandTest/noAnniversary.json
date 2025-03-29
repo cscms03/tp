@@ -1,0 +1,59 @@
+{
+  "persons" : [ {
+    "employeeId" : "00000000-0000-0000-0000-000000000011",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "tags" : [ "friends" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Hiring Womanager"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000012",
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "tags" : [ "owesMoney", "friends" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Financial Advisor"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000003",
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "tags" : [ ],
+    "anniversaries" : [ ],
+    "jobposition" : "Wall mart"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000004",
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "tags" : [ "friends" ],
+    "anniversaries" : [ ],
+    "jobposition" : "10th man"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000005",
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "tags" : [ ],
+    "anniversaries" : [ ],
+    "jobposition" : "The one"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000006",
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "tags" : [ ],
+    "anniversaries" : [ ],
+    "jobposition" : "little dyke"
+  }, {
+    "employeeId" : "00000000-0000-0000-0000-000000000007",
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "tags" : [ ],
+    "anniversaries" : [ ],
+    "jobposition" : "4th man"
+  } ]
+}

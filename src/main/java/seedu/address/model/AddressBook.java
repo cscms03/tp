@@ -57,10 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
-    public void sortByUpcomingDate() {
-        persons.sortByUpcomingDate(); // persons is of type UniquePersonList
-    }
-
     //// person-level operations
 
     /**
@@ -78,7 +74,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.hasDuplicatePersonDetails(person);
     }
-
     /**
      * Checks whether the given {@code EmployeeId} has a prefix conflict with any existing employee ID
      * in the address book. A prefix conflict occurs when one employee ID is a prefix of another one.
@@ -108,7 +103,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
-        // TODO: sort as person gets added
     }
 
     /**
@@ -119,7 +113,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
-        // TODO: sort as person gets edited
     }
 
     /**

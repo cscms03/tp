@@ -13,8 +13,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Anniversary {
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Anniversary date must be in YYYY-MM-DD format.";
-
     private final LocalDate date;
     private final AnniversaryType type;
     private final String description;

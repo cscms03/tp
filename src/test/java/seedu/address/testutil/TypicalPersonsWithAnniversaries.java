@@ -28,7 +28,7 @@ import seedu.address.model.person.Person;
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalPersonsWithAnniversaries {
 
     public static final Person ALICE = new PersonBuilder()
             .withEmployeeId("00000000-0000-0000-0000-000000000011")
@@ -114,7 +114,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersonsWithAnniversaries() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

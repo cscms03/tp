@@ -1,0 +1,76 @@
+@startuml
+title Import/Export Classes
+
+skinparam packageTitleFontStyle Bold
+skinparam classAttributeIconSize 0
+
+package "seedu.address.logic.parser" {
+    class ImportCommandParser {
+        - static final String BLANK
+        - static final String WRITE_MODE_MESSAGE
+        --
+        + ImportCommand parse(String args) : ImportCommand
+        --
+        - boolean isValidWriteMode(ArgumentMultimap argMultimap)
+    }
+}
+package seedu.address.model {
+    interface Model {
+        + void setAddressBook(ReadOnlyAddressBook addressBook)
+        + ReadOnlyAddressBook getAddressBook()
+    }
+}
+
+package "seedu.address.logic.commands {
+    abstract class Command {
+    + CommandResult execute(Model model) {abstract}
+    }
+}
+
+package "seedu.address.logic.commands.importexport" {
+    class ImportCommand {
+        - String filetype
+        - Path path
+        - String mode
+        --
+        + ImportCommand(String filetype, Path path, String mode)
+        + CommandResult execute(Model model) throws CommandException
+        --
+        - CommandResult handleOverwriteMode(Model model, JsonSerializableAddressBook importedData)
+        - CommandResult handleAppendMode(Model model, JsonSerializableAddressBook importedData)
+        - List<List<Person>> processImportedPersonsWhenAppend(Model model, JsonSerializableAddressBook importedData)
+        - AggregationResult aggregateImportedData(JsonSerializableAddressBook importedData)
+    }
+
+    class AddressBookFormatConverter {
+        + static JsonSerializableAddressBook importFromJson(Path filePath)
+        + static JsonSerializableAddressBook importFromCsv(Path filePath)
+        + static void exportToJson(ObservableList<Person> displayedPeople, Path filePath)
+        + static void exportToCsv(ObservableList<Person> displayedPeople, Path filePath)
+        --
+        - static ReadOnlyAddressBook createTempAddressBook(ObservableList<Person> personList)
+        - static JsonSerializableAddressBook csvToAddressBook(String csvData)
+        - static String addressBookToCsv(JsonSerializableAddressBook addressBook)
+    }
+}
+
+package "seedu.address.storage" {
+    class JsonCsvConverter {
+        + JsonCsvConverter(ObjectMapper mapper, QueryValidator validator)
+        + String toCsv(Object obj)
+        + <T> T fromCsv(String csvData, Class<T> clazz)
+        --
+        - <T> T parseAddressBookCsv(String csvData, Class<T> clazz)
+    }
+}
+
+' Relationships
+ImportCommand --|> Command
+ImportCommandParser --> ImportCommand : creates
+ImportCommand -> AddressBookFormatConverter : uses
+ImportCommand --> "1" JsonSerializableAddressBook : processes
+ImportCommand -> "1" Model : depends
+AddressBookFormatConverter -> "1" JsonSerializableAddressBook : returns
+AddressBookFormatConverter -> "1" JsonCsvConverter : uses
+
+@enduml

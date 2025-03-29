@@ -1,0 +1,15 @@
+employeeId,name,phone,email,jobposition,tags,anniversaryDate,anniversaryType,anniversaryTypeDesc,anniversaryName,anniversaryDescription
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,1995-03-16,Birthday,Birthday,Alice Pauline,Birthday
+00000000-0000-0000-0000-000000000011,Alice Pauline,94351253,alice@example.com,Hiring Womanager,friends,2017-08-07,Work Anniversary,Work Anniversary,Alice Pauline,Work Anniversary
+00000000-0000-0000-0000-000000000012,Benson Meier,98765432,johnd@example.com,Financial Advisor,owesMoney;friends,1991-05-11,Birthday,Birthday,Benson Meier,Birthday
+00000000-0000-0000-0000-000000000012,Benson Meier,98765432,johnd@example.com,Financial Advisor,owesMoney;friends,2015-12-25,Work Anniversary,Work Anniversary,Benson Meier,Work Anniversary
+00000000-0000-0000-0000-000000000003,Carl Kurz,95352563,heinz@example.com,Wall mart,"",1997-01-01,Birthday,Birthday,Carl Kurz,Birthday
+00000000-0000-0000-0000-000000000003,Carl Kurz,95352563,heinz@example.com,Wall mart,"",2018-08-18,Work Anniversary,Work Anniversary,Carl Kurz,Work Anniversary
+00000000-0000-0000-0000-000000000004,Daniel Meier,87652533,cornelia@example.com,10th man,friends,1993-11-13,Birthday,Birthday,Daniel Meier,Birthday
+00000000-0000-0000-0000-000000000004,Daniel Meier,87652533,cornelia@example.com,10th man,friends,2019-02-27,Work Anniversary,Work Anniversary,Daniel Meier,Work Anniversary
+00000000-0000-0000-0000-000000000005,Elle Meyer,9482224,werner@example.com,The one,"",1992-09-15,Birthday,Birthday,Elle Meyer,Birthday
+00000000-0000-0000-0000-000000000005,Elle Meyer,9482224,werner@example.com,The one,"",2016-06-01,Work Anniversary,Work Anniversary,Elle Meyer,Work Anniversary
+00000000-0000-0000-0000-000000000006,Fiona Kunz,9482427,lydia@example.com,little dyke,"",1994-08-22,Birthday,Birthday,Fiona Kunz,Birthday
+00000000-0000-0000-0000-000000000006,Fiona Kunz,9482427,lydia@example.com,little dyke,"",2017-11-22,Work Anniversary,Work Anniversary,Fiona Kunz,Work Anniversary
+00000000-0000-0000-0000-000000000007,George Best,9482442,anna@example.com,4th man,"",1996-04-12,Birthday,Birthday,George Best,Birthday
+00000000-0000-0000-0000-000000000007,George Best,9482442,anna@example.com,4th man,"",2018-10-12,Work Anniversary,Work Anniversary,George Best,Work Anniversary

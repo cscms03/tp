@@ -1,0 +1,45 @@
+@startuml
+actor user as U
+participant "DeleteAnniversaryCommandParser" as DACP
+participant "DeleteAnniversaryCommand" as DAC
+participant "ParserUtil" as PU
+participant "Model" as M
+participant "Person" as P
+participant "List<Anniversary>" as LA
+
+U -> DACP: parse(String args)
+activate DACP
+DACP -> PU: parseEmployeeIdPrefix(String employeeIdPrefix)
+activate PU
+PU --> DACP: EmployeeId
+deactivate PU
+DACP -> PU: parseIndex(String oneBasedIndex)
+activate PU
+PU --> DACP: Index
+deactivate PU
+create DAC
+DACP -> DAC: new DeleteAnniversaryCommand(EmployeeId employeeIdPrefix)
+Activate DAC
+return DeleteAnniversaryCommand
+DACP --> U : DeleteAnniversaryCommand
+deactivate DACP
+
+U -> DAC: execute(Model model)
+activate DAC
+DAC -> M : getFilteredByEmployeeIdPrefixList(EmployeeId employeeIdPrefix)
+activate M
+M --> DAC : List<Person>
+deactivate M
+DAC -> P : getAnniversaryList()
+activate P
+P --> DAC : List<Anniversary>
+deactivate P
+DAC -> LA : .get(targetIndex.getZeroBased())
+activate LA
+LA --> DAC : Anniversary
+deactivate LA
+DAC -> LA : remove(Anniversary)
+DAC -> M : setPerson(Person target, Person editedPerson)
+DAC --> U : CommandResult
+deactivate DAC
+@enduml

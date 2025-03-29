@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.anniversary.Anniversary;
 import seedu.address.model.person.Email;
@@ -22,7 +23,8 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+@Data
+public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     public static final String MALFORMED_FIELD_MESSAGE_FORMAT = "Person's %s field is malformed!";

@@ -1,0 +1,20 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "employeeId" : "00000000-0000-0000-0000-000000000011",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "job" : "Hiring Womanager",
+    "tags" : [ "friends" ]
+  },
+    {
+      "employeeId" : "00000000-0000-0000-0000-000000000011",
+      "name" : "Alice Paulina",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "job" : "Hiring Wommananager",
+      "tags" : [ "friends" ]
+    }
+  ]
+}

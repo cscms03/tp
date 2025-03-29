@@ -1,0 +1,52 @@
+@startuml
+
+title Sequence Diagram for ExportCommand
+
+actor User as U
+participant "ExportCommandParser" as ECP
+participant FilePathResolverUtils as FRU
+participant "ExportCommand" as EC
+participant Files as F
+participant " <<class>> \n AddressBookFormatConverter" as ABC
+
+
+U -> ECP: parse(String args)
+activate ECP
+alt filetype != null || filename != null == true
+ECP -> FRU : verifyFileTypePresentAndValid()
+activate FRU
+FRU --> ECP : Path
+deactivate FRU
+else filetype != null || filename != null == false
+end
+ECP -> EC : new ExportCommand(fileType, path)
+activate EC
+return ExportCommand
+ECP --> U : ExportCommand
+deactivate ECP
+
+U -> EC: execute(Model model)
+activate EC
+alt filetype == json
+EC -> ABC: exportToJson(path)
+activate ABC
+ABC -> JsonSerializableAddressBook : new JsonSerializableAddressBook
+activate JsonSerializableAddressBook
+return JsonSerializableAddressBook
+ABC -> F : write to path
+deactivate ABC
+else filetype == csv
+EC -> ABC : exportToCsv(path)
+activate ABC
+ABC -> JsonSerializableAddressBook : new JsonSerializableAddressBook
+activate JsonSerializableAddressBook
+return JsonSerializableAddressBook
+ABC -> ABC : addressBookToCsv(JsonSerializableAddressBook)
+ABC -> F : write to path
+deactivate ABC
+end
+EC --> U : CommandResult
+deactivate EC
+
+
+@enduml

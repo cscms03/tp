@@ -1,0 +1,91 @@
+{
+  "persons" : [ {
+    "employeeId" : "df57c625-1bdb-4772-a5aa-cb40320f078b",
+    "name" : "Alex Poh",
+    "phone" : "87438807",
+    "email" : "terimakasih@gmail.com",
+    "tags" : [ "friends" ],
+    "anniversaries" : [ {
+      "date" : "2025-03-13",
+      "type" : {
+        "name" : "Family",
+        "description" : ""
+      },
+      "description" : "\"Celebrating 25 years\"",
+      "name" : "\"Silver Wedding\""
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "wedding",
+        "description" : ""
+      },
+      "description" : "things",
+      "name" : "silver wedding"
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "wedding",
+        "description" : "wedding"
+      },
+      "description" : "things",
+      "name" : "silver wedding"
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "Work Anniversary",
+        "description" : "Work Anniversary"
+      },
+      "description" : "alex's Birthday",
+      "name" : "Birthday"
+    } ],
+    "jobposition" : "Blk 30 Geylang Street 29, #06-40"
+  }, {
+    "employeeId" : "3b8dab19-be78-459b-b271-1d55ac73ad09",
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "tags" : [ "colleagues", "friends" ],
+    "anniversaries" : [ {
+      "date" : "2025-03-12",
+      "type" : {
+        "name" : "something",
+        "description" : ""
+      },
+      "description" : "something",
+      "name" : "wedding"
+    } ],
+    "jobposition" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18"
+  }, {
+    "employeeId" : "cd3ffbf5-99a4-4b30-8d04-551aea85d26b",
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "tags" : [ "neighbours" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Blk 11 Ang Mo Kio Street 74, #11-04"
+  }, {
+    "employeeId" : "9c8d86ff-06c1-4665-afcf-bc3205c93bdd",
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "tags" : [ "family" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Blk 436 Serangoon Gardens Street 26, #16-43"
+  }, {
+    "employeeId" : "da4ef25d-2ad2-4a30-819e-ddf9a0c2d54d",
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "tags" : [ "classmates" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Blk 47 Tampines Street 20, #17-35"
+  }, {
+    "employeeId" : "721bbf97-2f57-4365-b0f6-98644614b67b",
+    "name" : "Roy Balakrishnan",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "tags" : [ "colleagues" ],
+    "anniversaries" : [ ],
+    "jobposition" : "Blk 45 Aljunied Street 85, #11-31"
+  } ]
+}

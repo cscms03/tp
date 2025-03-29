@@ -85,4 +85,14 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public ObservableList<Person> getBirthdayReminderList() {
+        return model.getBirthdayReminderList();
+    }
+
+    @Override
+    public ObservableList<Person> getWorkAnniversaryReminderList() {
+        return model.getWorkAnniversaryReminderList();
+    }
 }

@@ -5,6 +5,6 @@ package seedu.address.model.anniversary;
  */
 public class Birthday extends AnniversaryType {
     public Birthday() {
-        super("Birthday", " Birthday");
+        super("Birthday", "Birthday");
     }
 }

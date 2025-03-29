@@ -1,7 +1,12 @@
 package seedu.address.model.person;
 
 /**
- * Represents a Person's employee ID in the address book.
+ * Represents a Person's employee ID in the address book
+ * Person ID is used as a universal static identifier,
+ * serving as a reference interface.
+ * At any point in time, for two different employees
+ * no employee id of one employee shall be prefix of the the employee id
+ * of another employee.
  */
 public class EmployeeId {
 

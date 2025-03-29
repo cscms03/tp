@@ -11,8 +11,12 @@ title: Developer Guide
 1. [Add employee records: `add`](#add-employee-records)
 2. [Delete employee records: `delete`](#delete-employee-records)
 3. [Undo changes made: `undo`](#undo-changes)
-4. [Reminder for events](#reminder-for-events)
-5. [Save employee records](#save-employee-records)
+4. [Anniversary related commands: ](#Anniversaries)
+   1. [AddAnniversaryCommand: ] (#AddAnniversaries)
+   2. [DeleteAnniversaryCommand: ] (#DeleteAnniversaries)
+   3. [ShowAnniversaryCommand: ] (#ShowAnniversaries)
+5. [Reminder for events](#reminder-for-events)
+6. [Save employee records](#save-employee-records)
 
 - [User Stories](#user-stories)
 --------------------------------------------------------------------------------------------------------------------
@@ -100,6 +104,42 @@ undo
 * **Success**: Undo successful. Last action reverted.
 * **Failure**: Error: No changes to undo. (This will occur if there are no actions to undo or the history stack is empty.)
 
+---
+### **Anniversary commands**
+#### Purpose:
+Allows HR workers to manage employee anniversaries.
+
+### **AddAnniversaryCommand**
+- **Description**: Creates a new anniversary entry for an existing employee.
+- **Usage**: `anniversary eid/EMPLOYEE_ID_PREFIX d/DATE n/ANNIVERSARY_NAME [ad/DESCRIPTION] [at/TYPE]...`
+- **Constraints**:
+    - Valid date format: YYYY-MM-DD
+    - Must specify at least one `at/` prefix
+- **Required**:
+  - eid/ to match an existing employee ID prefix
+  - d/ must be a valid date in `YYYY-MM-DD`
+  - n/ is the anniversary name
+  - at/ is at least one type (e.g., personal, family)
+- **Optional**:
+  - ad/ is an extra description (e.g., birthday celebration, gift ideas)
+- **Example**:
+  - `anniversary eid/abc d/2025-01-01 n/Birthday at/Personal`
+  - `anniversary eid/1234 d/2023-12-25 n/ChristmasParty ad/GiftExchange at/Cultural`
+- **Success**:
+```
+  Anniversary: <Details> added successfully.  
+```
+- **Failure Cases**:
+  - Multiple Matches: `Multiple employees found with prefix XYZ`
+  - No Matches: `No employee found with prefix XYZ`
+  - Invalid Date: `Invalid date format: <date>`</date>
+  - Missing Required Prefix: `eid/`, `d/`, `n/`, or `at/` not provided
+  - Duplicate Anniversary: `This anniversary already exists.`
+  - Too Many/Too Few 'at/' Prefixes: Causes parse errors, prompting recheck of syntax.
+
+```
+Anniversaries
+```
 ---
 
 ### Reminder for Events

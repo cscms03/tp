@@ -1,0 +1,62 @@
+@startuml
+
+title Sequence Diagram for ImportCommand
+
+actor User as U
+participant "ImportCommandParser" as ICP
+participant "ImportCommand" as IC
+participant "AddressBookFormatConverter" as ABC
+participant "Model" as M
+participant JsonSerializableAddressBook
+
+U -> ICP: parse(String args)
+activate ICP
+
+ICP -> ICP: ArgumentTokenizer.tokenize(args, prefixes)
+ICP -> ICP: verifyFileTypePresentAndValid()
+ICP -> ICP: isValidWriteMode(...)
+create IC
+ICP -> IC: new ImportCommand(fileType, path, writeMode)
+deactivate ICP
+activate IC
+return ImportCommand
+
+U -> IC: execute(Model model)
+activate IC
+
+
+
+alt fileType == "json"
+    IC -> ABC: importFromJson(path)
+    activate ABC
+    ABC -> ABC: read Json content
+    ABC --> IC : JsonSerializableAddressBook
+    deactivate ABC
+else fileType == "csv"
+    IC -> ABC: importFromCsv(path)
+    activate ABC
+    ABC -> ABC: read CSV content
+    ABC -> ABC: parse CSV into\nJsonSerializableAddressBook
+    ABC -> JsonSerializableAddressBook : aggregatePersons
+    activate JsonSerializableAddressBook
+    return JsonSerializableAddressBook
+    ABC --> IC : JsonSerializableAddressBook
+    deactivate ABC
+end
+
+alt mode == "overwrite"
+    IC -> IC: handleOverwriteMode(model, importedData)
+    IC -> IC: aggregateImportedData(importedData)
+    IC -> M: setAddressBook(new AddressBook)
+else mode == "append"
+    IC -> IC: handleAppendMode(model, importedData)
+    IC -> IC: processImportedPersonsWhenAppend(model, importedData)
+    IC -> IC: aggregateImportedData(importedData)
+    IC -> M: addPerson(...) * n
+end
+
+'return CommandResult
+
+deactivate IC
+
+@enduml

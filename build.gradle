@@ -26,6 +26,8 @@ checkstyle {
 
 test {
     useJUnitPlatform()
+    // This opens up java.time for reflection for the json tests
+    jvmArgs += ['--add-opens', 'java.base/java.time=ALL-UNNAMED']
     finalizedBy jacocoTestReport
 }
 
@@ -77,7 +79,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'Hreers.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

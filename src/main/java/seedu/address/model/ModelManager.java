@@ -28,6 +28,10 @@ public class ModelManager implements Model {
     private int currentStatePointer = 0;
     private List<AddressBook> addressBookStates = new ArrayList<>();
 
+    private final FilteredList<Person> birthdayReminderList;
+
+    private final FilteredList<Person> workAnniversaryReminderList;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +48,12 @@ public class ModelManager implements Model {
 
         // Apply default filtering
         filteredPersons.setPredicate(person -> true);
+
+        this.birthdayReminderList = new FilteredList<>(this.addressBook.getPersonList());
+        this.birthdayReminderList.setPredicate(person -> false);
+
+        this.workAnniversaryReminderList = new FilteredList<>(this.addressBook.getPersonList());
+        this.workAnniversaryReminderList.setPredicate(person -> false);
     }
 
     public ModelManager() {
@@ -99,6 +109,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateBirthdayReminderList() {
+        birthdayReminderList.setPredicate(person -> {
+            boolean isUpcoming = person.isUpcomingWithinDays("Birthday", 3);
+            System.out.println(person.getName() + ": " + isUpcoming);
+            return isUpcoming;
+        });
+        System.out.println("Filtered birthday list: " + birthdayReminderList.size());
+    }
+
+    @Override
+    public void updateWorkAnniversaryReminderList() {
+        workAnniversaryReminderList.setPredicate(person -> {
+            boolean isUpcoming = person.isUpcomingWithinDays("Work Anniversary", 3);
+            System.out.println(person.getName() + ": " + isUpcoming);
+            return isUpcoming;
+        });
+        System.out.println("Filtered wa list: " + workAnniversaryReminderList.size());
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -121,7 +151,6 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasDuplicatePersonDetails(person);
     }
-
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
@@ -162,6 +191,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getBirthdayReminderList() {
+        return birthdayReminderList;
+    }
+
+    @Override
+    public ObservableList<Person> getWorkAnniversaryReminderList() {
+        return workAnniversaryReminderList;
     }
 
     @Override

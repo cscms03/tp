@@ -1,0 +1,63 @@
+@startuml
+title Import/Export Classes
+skinparam packageTitleFontStyle Bold
+skinparam classAttributeIconSize 0
+
+package "seedu.address.logic.parser" {
+    class exportCommandParser {
+        --
+        + ExportCommand parse(String args) : ExportCommand
+    }
+}
+
+package "seedu.address.logic.commands {
+    abstract class Command {
+    + CommandResult execute(Model model) {abstract}
+    }
+}
+
+package "seedu.address.logic.parser" {
+    class FilePathResolverUtils {
+        - static String BLANK
+        --
+        + Path resolveFilePath(String filePath, String filename, String fileType) : Path
+        - looksLikeFile(Path path) : boolean
+        - ensureCorrectExtension(String name, String requiredExt) : String
+        - validateFileExtension(String fileName, String expectedExtension, String fileType) : void
+        + verifyFileTypePresentAndValid(ArgumentMultimap argMultimap, String commandType) : void
+    }
+}
+
+package "seedu.address.logic.commands.importexport" {
+    class ExportCommand {
+        + COMMAND_WORD : String
+        + MESSAGE_USAGE : String
+        - logger : Logger
+        - filetype : String
+        - path : Path
+        --
+        + ExportCommand(String filetype, Path path) : ExportCommand
+        + execute(Model model) : CommandResult
+    }
+
+    class AddressBookFormatConverter {
+            + static JsonSerializableAddressBook importFromJson(Path filePath)
+            + static JsonSerializableAddressBook importFromCsv(Path filePath)
+            + static void exportToJson(ObservableList<Person> displayedPeople, Path filePath)
+            + static void exportToCsv(ObservableList<Person> displayedPeople, Path filePath)
+            --
+            - static ReadOnlyAddressBook createTempAddressBook(ObservableList<Person> personList)
+            - static JsonSerializableAddressBook csvToAddressBook(String csvData)
+            - static String addressBookToCsv(JsonSerializableAddressBook addressBook)
+    }
+}
+
+ExportCommand --|> Command
+exportCommandParser --> "1" ExportCommand : creates
+exportCommandParser -> FilePathResolverUtils : uses
+ExportCommand -> AddressBookFormatConverter : uses
+ExportCommand -> "1" CommandResult : returns
+AddressBookFormatConverter -> "1" Files : writes to
+AddressBookFormatConverter --> "1" JsonSerializableAddressBook : creates
+
+@enduml

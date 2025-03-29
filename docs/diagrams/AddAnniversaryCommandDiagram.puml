@@ -1,0 +1,93 @@
+@startuml
+package seedu.address.logic.parser.anniversary {
+    class AddAnniversaryCommandParser {
+        + parse(String args) : AddAnniversaryCommand
+    }
+    class AnniversaryParserUtils {
+        + parseAnniversary(ArgumentMultimap argMultimap) : Anniversary
+    }
+}
+
+package seedu.address.logic.parser {
+    class ParserUtil {
+    + parseEmployeeIdPrefix(String employeeIdPrefix) : EmployeeId
+    }
+}
+
+package "seedu.address.logic.commands {
+    abstract class Command {
+    + CommandResult execute(Model model) {abstract}
+    }
+}
+
+package seedu.address.model {
+    interface Model {
+        + getFilteredByEmployeeIdPrefixList(EmployeeId employeeIdPrefix) : List<Person>
+        + setPerson(Person target, Person editedPerson) : void
+    }
+}
+
+package seedu.address.logic.commands.anniversary {
+    class AddAnniversaryCommand {
+        - toAdd : Anniversary
+        - employeeIdPrefix : EmployeeId
+        --
+        + AddAnniversaryCommand(EmployeeId employeeIdPrefix, Anniversary anniversary)
+        + execute(Model model) : CommandResult
+    }
+}
+
+package seedu.address.model.anniversary {
+    class Anniversary {
+        - date : LocalDate
+        - name : String
+        - description : String
+        - type : AnniversaryType
+        --
+        + Anniversary(LocalDate date, String name, String description, String type)
+    }
+    class AnniversaryType {
+    - type : String}
+        - description : String
+        --
+        + AnniversaryType(String type, String description)
+    }
+}
+
+package seedu.address.model.person {
+    class EmployeeId {
+        - employeeId : UUID
+        --
+        + EmployeeId(UUID employeeId)
+    }
+    class Person {
+    - employeeId : EmployeeId
+        - name : Name
+        - jobPosition : JobPosition
+        - email : Email
+        - phone : Phone
+        - tags : Set<Tag>
+        - anniversaries : List<Anniversary>
+        --
+        + Person(EmployeeId employeeId, Name name, JobPosition jobPosition, Email email, Phone phone, Set<Tag> tags, List<Anniversary> anniversaries)
+    }
+}
+
+AddAnniversaryCommand --|> Command
+AddAnniversaryCommandParser --> "1" AddAnniversaryCommand : creates
+AddAnniversaryCommandParser --> AnniversaryParserUtils : uses
+AddAnniversaryCommandParser -> ParserUtil : uses
+AddAnniversaryCommandParser --> "1" EmployeeId : uses
+ParserUtil --> "1" EmployeeId : creates
+AnniversaryParserUtils -> "1" Anniversary : creates
+AddAnniversaryCommand --> "1" CommandResult : returns
+AddAnniversaryCommand --> "1" Anniversary : contains
+AddAnniversaryCommand --> "1" EmployeeId : contains
+AddAnniversaryCommand -> Person : processes
+AddAnniversaryCommand -> "1" Person : finds for update
+AddAnniversaryCommand -> Model : updates
+
+
+
+@enduml
+

@@ -18,10 +18,16 @@ public class CliSyntax {
     public static final Prefix PREFIX_WORK_ANNIVERSARY = new Prefix("wa/");
 
     /* Prefix definitions for custom anniversaries */
+    public static final Prefix PREFIX_ANNIVERSARY_NAME = new Prefix("an/");
     public static final Prefix PREFIX_ANNIVERSARY_DATE = new Prefix("d/");
     public static final Prefix PREFIX_ANNIVERSARY_DESC = new Prefix("ad/");
     public static final Prefix PREFIX_ANNIVERSARY_TYPE = new Prefix("at/");
     public static final Prefix PREFIX_ANNIVERSARY_TYPE_DESC = new Prefix("atdesc/");
     public static final Prefix PREFIX_ANNIVERSARY_INDEX = new Prefix("ai/");
 
+    /* Prefix definitions for import export */
+    public static final Prefix PREFIX_FILEPATH = new Prefix("fp/");
+    public static final Prefix PREFIX_FILENAME = new Prefix("fn/");
+    public static final Prefix PREFIX_FILETYPE = new Prefix("ft/");
+    public static final Prefix PREFIX_WRITE_MODE = new Prefix("wm/");
 }

@@ -1,0 +1,43 @@
+{
+  "persons" : [ {
+    "employeeId" : "df57c625-1bdb-4772-a5aa-cb40320f078b",
+    "name" : "Alex Poh",
+    "phone" : "87438807",
+    "email" : "terimakasih@gmail.com",
+    "tags" : [ "friends" ],
+    "anniversaries" : [ {
+      "date" : "2025-03-13",
+      "type" : {
+        "name" : "Family",
+        "description" : ""
+      },
+      "description" : "\"Celebrating 25 years\"",
+      "name" : "\"Silver Wedding\""
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "wedding",
+        "description" : ""
+      },
+      "description" : "things",
+      "name" : "silver wedding"
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "wedding",
+        "description" : "wedding"
+      },
+      "description" : "things",
+      "name" : "silver wedding"
+    }, {
+      "date" : "2025-02-25",
+      "type" : {
+        "name" : "Work Anniversary",
+        "description" : "Work Anniversary"
+      },
+      "description" : "alex's Birthday",
+      "name" : "Birthday"
+    } ],
+    "jobposition" : "Blk 30 Geylang Street 29, #06-40"
+  } ]
+}

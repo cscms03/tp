@@ -45,9 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         EmployeeId employeeIdPrefix;
 
         try {
-            employeeIdPrefix = ParserUtil.parseEmployeeIdPrefix(argMultimap.getValue(PREFIX_EMPLOYEEID)
-                    .orElseThrow(() -> new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.MESSAGE_USAGE)
-            ));
+            employeeIdPrefix = ParserUtil.parseEmployeeIdPrefix(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }

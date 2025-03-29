@@ -1,0 +1,5 @@
+employeeId,name,phone,email,jobposition,tags,anniversaryDate,anniversaryType,anniversaryTypeDesc,anniversaryName,anniversaryDescription
+df57c625-1bdb-4772-a5aa-cb40320f078b,Alex Poh,87438807,terimakasih@gmail.com,"Blk 30 Geylang Street 29, #06-40",friends,2025-03-13,Family,"","""Silver Wedding""","""Celebrating 25 years"""
+df57c625-1bdb-4772-a5aa-cb40320f078b,Alex Poh,87438807,terimakasih@gmail.com,"Blk 30 Geylang Street 29, #06-40",friends,2025-02-25,wedding,"",silver wedding,things
+df57c625-1bdb-4772-a5aa-cb40320f078b,Alex Poh,87438807,terimakasih@gmail.com,"Blk 30 Geylang Street 29, #06-40",friends,2025-02-25,wedding,wedding,silver wedding,things
+df57c625-1bdb-4772-a5aa-cb40320f078b,Alex Poh,87438807,terimakasih@gmail.com,"Blk 30 Geylang Street 29, #06-40",friends,2025-02-25,Work Anniversary,Work Anniversary,Birthday,alex's Birthday

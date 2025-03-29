@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEEID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBPOSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -30,7 +31,8 @@ public class AddPersonCommand extends Command {
             + PREFIX_JOBPOSITION + "JOB_POSITION "
             + "[" + PREFIX_TAG + "TAG]..."
             + PREFIX_BIRTHDAY + "BIRTHDAY"
-            + PREFIX_WORK_ANNIVERSARY + "WORK_ANNIVERSARY\n"
+            + PREFIX_WORK_ANNIVERSARY + "WORK_ANNIVERSARY "
+            + PREFIX_EMPLOYEEID + "[EMPLOYEEID]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -39,7 +41,8 @@ public class AddPersonCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
             + PREFIX_BIRTHDAY + "2000-01-01 "
-            + PREFIX_WORK_ANNIVERSARY + "2020-07-08";
+            + PREFIX_WORK_ANNIVERSARY + "2020-07-08 "
+            + PREFIX_EMPLOYEEID + "3b9417cc-cf4e-4231-bc4d-4fd167c2abc6";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
